@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Vortex Tools</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;overflow-x:hidden;background:#000;color:#fff;}
+body {
+  background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  color: #333;
+}
+@keyframes gradientBG {
+  0% {background-position:0% 50%;}
+  50% {background-position:100% 50%;}
+  100% {background-position:0% 50%;}
+}
+.background-hearts {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  opacity: 0.6;
+}
+.heart {
+  position: absolute;
+  font-size: 24px;
+  color: rgba(255, 105, 180, 0.3);
+  animation: float 15s infinite linear;
+  pointer-events: none;
+}
+.heart:nth-child(1) {
+  top: -10%;
+  left: 10%;
+  animation-duration: 20s;
+}
+.heart:nth-child(2) {
+  top: 20%;
+  right: 5%;
+  animation-duration: 15s;
+  animation-delay: 1s;
+}
+.heart:nth-child(3) {
+  bottom: 15%;
+  left: 20%;
+  animation-duration: 25s;
+  animation-delay: 0.5s;
+}
+.heart:nth-child(4) {
+  top: 30%;
+  right: 25%;
+  animation-duration: 18s;
+  animation-delay: 2s;
+}
+.heart:nth-child(5) {
+  bottom: 5%;
+  right: 15%;
+  animation-duration: 22s;
+  animation-delay: 1.5s;
+}
+@keyframes float {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-100px) rotate(360deg);
+  }
+}
+header{
+  padding:20px;font-size:2rem;font-weight:700;text-align:left;
+  color:#d81b60;text-shadow:0 0 10px rgba(216, 27, 96, 0.3);
+  position:relative;z-index:1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  animation: fadeInDown 1s ease;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 0 0 15px 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  margin: 0 20px;
+}
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.search-container {
+  display: flex;
+  justify-content: center;
+  margin: 15px 0;
+  width: 100%;
+  animation: fadeIn 1.2s ease;
+}
+.search-box {
+  padding: 12px 20px;
+  border-radius: 30px;
+  border: 2px solid #ec407a;
+  background: rgba(255, 255, 255, 0.9);
+  color: #d81b60;
+  width: 100%;
+  max-width: 500px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(236, 64, 122, 0.2);
+}
+.search-box:focus {
+  outline: none;
+  box-shadow: 0 0 15px #ec407a, 0 0 25px rgba(236, 64, 122, 0.3);
+  transform: scale(1.02);
+}
+.search-box::placeholder {
+  color: #f48fb1;
+}
+.container{position:relative;z-index:1; padding: 0 20px;}
+.grid{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:20px;margin-top:30px
+}
+.card{
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid transparent;
+  border-radius:16px;
+  padding:25px 20px;
+  width:250px;
+  text-align:center;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  color: #d81b60;
+  position: relative;
+  overflow: hidden;
+  animation: cardAppear 0.6s ease forwards;
+  opacity: 0;
+  transform: translateY(30px);
+  box-shadow: 0 10px 30px rgba(216, 27, 96, 0.15);
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #f8bbd0, #f48fb1, #f06292, #ec407a);
+  background-size: 400% 400%;
+  z-index: -1;
+  border-radius: 18px;
+  animation: borderGlow 3s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card:hover{
+  background: rgba(255, 255, 255, 0.95);
+  transform: scale(1.05) translateY(-10px);
+  box-shadow: 0 15px 35px rgba(216, 27, 96, 0.25);
+}
+
+.card h3{
+  font-size:1.2rem;
+  margin-bottom:10px;
+  text-shadow: 0 0 8px rgba(216, 27, 96, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.card:hover h3 {
+  transform: scale(1.1);
+}
+
+@keyframes cardAppear {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes borderGlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.btn{
+  display:inline-block;
+  margin-top:8px;
+  padding:10px 18px;
+  border-radius:10px;
+  background: linear-gradient(45deg, #ec407a, #f06292);
+  color: white;
+  text-decoration:none;
+  font-weight:700;
+  transition:all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  box-shadow: 0 5px 15px rgba(236, 64, 122, 0.3);
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #f06292, #ec407a, #f06292);
+  background-size: 200% 200%;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+  animation: btnGlow 2s linear infinite;
+}
+
+.btn:hover::before {
+  opacity: 1;
+}
+
+.btn:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(236, 64, 122, 0.4);
+}
+
+@keyframes btnGlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+#category-view{
+  display:none;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.category-header{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin:20px 0;
+  width: 100%;
+  animation: slideInLeft 0.5s ease;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.back{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:8px 14px;
+  border-radius:10px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #d81b60;
+  text-decoration:none;
+  cursor:pointer;
+  border: 1px solid #f8bbd0;
+  transition:all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(216, 27, 96, 0.1);
+}
+
+.back:hover{
+  background: rgba(255, 255, 255, 1);
+  transform: translateX(-5px);
+  box-shadow: 0 8px 20px rgba(216, 27, 96, 0.2);
+}
+
+.category-title{
+  font-size:1.4rem;
+  color: #d81b60;
+  text-shadow: 0 0 10px rgba(216, 27, 96, 0.3);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { text-shadow: 0 0 10px rgba(216, 27, 96, 0.3); }
+  50% { text-shadow: 0 0 20px rgba(216, 27, 96, 0.4), 0 0 30px rgba(216, 27, 96, 0.2); }
+  100% { text-shadow: 0 0 10px rgba(216, 27, 96, 0.3); }
+}
+.tool-card{
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #f8bbd0;
+  border-radius:14px;
+  width:220px;
+  padding:18px 14px;
+  text-align:center;
+  transition:all 0.3s ease;
+  animation: toolAppear 0.5s ease forwards;
+  opacity: 0;
+  transform: scale(0.9);
+  box-shadow: 0 10px 25px rgba(216, 27, 96, 0.1);
+}
+
+.tool-card:hover{
+  border-color: #ec407a;
+  transform: scale(1.05) translateY(-5px);
+  box-shadow: 0 15px 30px rgba(216, 27, 96, 0.2);
+}
+
+.tool-card h4{
+  font-size:1.05rem;
+  margin-bottom:8px;
+  color: #d81b60;
+  transition: transform 0.3s ease;
+}
+
+.tool-card:hover h4 {
+  transform: scale(1.05);
+}
+
+@keyframes toolAppear {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.tool-link{
+  display:inline-block;
+  margin-top:6px;
+  padding:8px 14px;
+  border-radius:9px;
+  background: linear-gradient(45deg, #ec407a, #f06292);
+  color: white;
+  font-weight:700;
+  text-decoration:none;
+  transition:all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(236, 64, 122, 0.3);
+}
+
+.tool-link:hover{
+  background: linear-gradient(45deg, #f06292, #ec407a);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(236, 64, 122, 0.4);
+}
+footer{
+  width:100%;
+  padding:15px 0;
+  text-align:center;
+  color: #d81b60;
+  font-size:.9rem;
+  margin-top:40px;
+  position:relative;
+  z-index:1;
+  animation: fadeInUp 1s ease;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 15px 15px 0 0;
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+  margin: 40px 20px 0 20px;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+footer img{
+  width:20px;
+  height:20px;
+  vertical-align:middle;
+  transition: transform 0.3s ease;
+}
+
+footer img:hover {
+  transform: scale(1.2);
+}
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+    margin: 0 10px;
+  }
+  
+  .grid {
+    gap: 15px;
+  }
+  
+  .card, .tool-card {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  footer {
+    margin: 40px 10px 0 10px;
+  }
+  
+  .heart {
+    display: none;
+  }
+}
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.5);
+}
+::-webkit-scrollbar-thumb {
+  background: #f48fb1;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ec407a;
+  box-shadow: 0 0 5px rgba(236, 64, 122, 0.5);
+}
+.notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 12px 22px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #d81b60;
+  border: 1px solid #f8bbd0;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(216, 27, 96, 0.2);
+  z-index: 1000;
+  transform: translateX(100%);
+  opacity: 0;
+  transition: all 0.5s ease;
+  backdrop-filter: blur(5px);
+}
+
+.notification.show {
+  transform: translateX(0);
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+<div class="background-hearts">
+  <div class="heart">❤</div>
+  <div class="heart">❤</div>
+  <div class="heart">❤</div>
+  <div class="heart">❤</div>
+  <div class="heart">❤</div>
+</div>
+<header>
+  <div>Vortex</div>
+  <div class="search-container">
+    <input type="text" class="search-box" id="search-box" placeholder="Search tools...">
+  </div>
+</header>
+
+<main id="home" class="container">
+  <div class="grid">
+    <div class="card" style="animation-delay: 0.1s">
+      <h3>Redlutus</h3>
+      <button class="btn" onclick="showCategory('system')">Open</button>
+    </div>
+    <div class="card" style="animation-delay: 0.2s">
+      <h3>Nirsoft</h3>
+      <button class="btn" onclick="showCategory('network')">Open</button>
+    </div>
+    <div class="card" style="animation-delay: 0.3s">
+      <h3>epokw</h3>
+      <button class="btn" onclick="showCategory('analysis')">Open</button>
+    </div>
+    <div class="card" style="animation-delay: 0.4s">
+      <h3>Vortex</h3>
+      <button class="btn" onclick="showCategory('misc')">Open</button>
+    </div>
+  </div>
+</main>
+<section id="category-view" class="container">
+  <div class="category-header">
+    <button class="back" onclick="goHome()">← Back</button>
+    <div class="category-title" id="category-title">Category</div>
+  </div>
+  <div id="tools-grid" class="grid"></div>
+</section>
+
+<footer>
+  By Thekiller/Bridgezan/Therewasvelocity
+  <a href="https://discord.gg/QrzeN2hHK4" target="_blank">
+    <img src="https://abrehamrahi.ir/o/public/QdPi9AsE/" alt="Discord">
+  </a>
+</footer>
+<div class="notification" id="notification"></div>
+<script>
+  function copyText(text) {
+  navigator.clipboard.writeText(text).then(() => {
+    showNotification("Copied: " + text);
+  });
+}
+const DATA = {
+  system: {
+    title: "Redlutus",
+    tools: [
+      {
+        name: "manual tasks",
+        code: "powershell -Command Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; Invoke-Expression (Invoke-RestMethod 'https://raw.githubusercontent.com/nolww/project-mohr/refs/heads/main/ManualTasks.ps1')"
+      },
+      {
+        name: "ModAnalyzer",
+        code: "powershell Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass && powershell Invoke-Expression (Invoke-RestMethod https://raw.githubusercontent.com/HabibiHadron/HabibiModAnalyzer/refs/heads/main/HabibiModAnalyzer.ps1)"
+      },
+      {
+        name: "path",
+        code: "powershell Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass && powershell Invoke-Expression (Invoke-RestMethod https://raw.githubusercontent.com/bacanoicua/Screenshare/main/RedLotusSignatures.ps1)"
+      },
+      {
+        name: "prefetch checker",
+        code: "powershell Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass && powershell Invoke-Expression (Invoke-RestMethod https://raw.githubusercontent.com/bacanoicua/Screenshare/main/RedLotusPrefetchIntegrityAnalyzer.ps1)"
+      },
+      {
+        name: "Bam",
+        code: "powershell Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass && powershell Invoke-Expression (Invoke-RestMethod https://raw.githubusercontent.com/PureIntent/ScreenShare/main/RedLotusBam.ps1)"
+      },
+      {
+        name: "task shulder",
+        code: "powershell -Command Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; Invoke-Expression (Invoke-RestMethod 'https://raw.githubusercontent.com/ObsessiveBf/Task-Scheduler-Parser/main/script.ps1')"
+      }
+    ]
+  },
+  network: {
+    title: "Nirsoft",
+    tools: [
+      { name: "WinPrefetchView", url: "https://www.nirsoft.net/utils/winprefetchview-x64.zip" },
+      { name: "USBDriveLog", url: "https://www.nirsoft.net/utils/usbdrivelog.zip" },
+      { name: "USBDeview", url: "https://www.nirsoft.net/utils/usbdeview-x64.zip" },
+      { name: "LastActivityView", url: "https://www.nirsoft.net/utils/lastactivityview.zip" }
+    ]
+  },
+  analysis: {
+    title: "Epokw",
+    tools: [
+      { name: "BAM Parser", url: "https://github.com/spokwn/BAM-parser/releases/download/v1.2.9/BAMParser.exe" },
+      { name: "Prefetch Parser", url: "https://github.com/spokwn/prefetch-parser/releases/download/v1.5.5/PrefetchParser.exe" },
+      { name: "PcaSvc", url: "https://github.com/spokwn/pcasvc-executed/releases/download/v0.8.6/PcaSvcExecuted.exe" },
+      { name: "ProcessParser", url: "https://github.com/spokwn/process-parser/releases/download/v0.5.5/ProcessParser.exe" }
+    ]
+  },
+  misc: {
+    title: "Vortex",
+    tools: [
+      {
+        name: "all in one (bridgezna)",
+        code: "powershell -Command Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; Invoke-Expression (Invoke-RestMethod 'https://raw.githubusercontent.com/bridgerzan/screenshare-tools/refs/heads/main/all-in-one-beta.ps1')"
+      },
+      {
+        name: "all in one (therewasvelocity)",
+        code: "powershell -Command Set-ExecutionPolicy Bypass -Scope Process; Invoke-Expression (Invoke-RestMethod 'https://raw.githubusercontent.com/ThereWasVelocity/SS-Tools/main/All-in-one.ps1')"
+      },
+      {
+        name: "downloader",
+        code: "powershell -Command Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; Invoke-Expression (Invoke-RestMethod 'https://raw.githubusercontent.com/bridgerzan/screenshare-tools/refs/heads/main/downloader.ps1')"
+      },
+      {
+        name: "fielless bypass",
+        code: "powershell -Command Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; Invoke-Expression (Invoke-RestMethod 'https://raw.githubusercontent.com/bridgerzan/screenshare-tools/refs/heads/main/fileless.ps1')"
+      },
+      {
+        name: "task shulder",
+        code: "powershell -Command Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; Invoke-Expression (Invoke-RestMethod 'https://raw.githubusercontent.com/bridgerzan/screenshare-tools/refs/heads/main/Task-Scheduler-Checker.ps1')"
+      },
+      {
+        name: "services",
+        code: "powershell -Command Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; Invoke-Expression (Invoke-RestMethod 'https://raw.githubusercontent.com/bridgerzan/screenshare-tools/refs/heads/main/services.ps1')"
+      },
+      {
+        name: "hwid",
+        code: "powershell -Command Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; Invoke-Expression (Invoke-RestMethod 'https://raw.githubusercontent.com/bridgerzan/screenshare-tools/refs/heads/main/hwid.ps1')"
+      },
+      {
+        name: "mod analyzer",
+        code: "powershell -Command Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; Invoke-Expression (Invoke-RestMethod 'https://raw.githubusercontent.com/bridgerzan/screenshare-tools/refs/heads/main/mod-analyzer.ps1')"
+      },
+      {
+        name: "alt detector",
+        code: "powershell -Command Set-ExecutionPolicy Bypass -Scope Process; Invoke-Expression (Invoke-RestMethod 'https://raw.githubusercontent.com/ThereWasVelocity/SS-Tools/main/Alt-Detector.ps1')"
+      }
+    ]
+  }
+};
+const home = document.getElementById("home");
+const view = document.getElementById("category-view");
+const titleEl = document.getElementById("category-title");
+const grid = document.getElementById("tools-grid");
+const searchBox = document.getElementById("search-box");
+const notification = document.getElementById("notification");
+function showCategory(key){
+  const cat = DATA[key];
+  titleEl.textContent = cat.title;
+  grid.innerHTML = "";
+  cat.tools.forEach((t, index) => {
+    setTimeout(() => {
+      const div = document.createElement("div");
+      div.className = "tool-card";
+      div.style.animationDelay = `${index * 0.1}s`;
+      div.innerHTML = `<h4>${t.name}</h4>` + 
+      (t.code 
+      ? `<button class="tool-link" onclick="copyText(\`${t.code}\`)">Copy</button>` 
+      : `<a href="${t.url}" class="tool-link" target="_blank">Download</a>`);
+      grid.appendChild(div);
+    }, index * 100);
+  });
+  home.style.display = "none";
+  view.style.display = "block";
+  showNotification(`Showing ${cat.title} tools`);
+}
+function goHome(){
+  view.style.display = "none";
+  home.style.display = "block";
+  searchBox.value = "";
+  showNotification("Back to main menu");
+}
+searchBox.addEventListener('input', function() {
+  const searchTerm = this.value.toLowerCase();
+  const toolCards = grid.querySelectorAll('.tool-card');
+  const mainCards = document.querySelectorAll('#home .card');
+  if (view.style.display === 'block') {
+    toolCards.forEach(card => {
+      const toolName = card.querySelector('h4').textContent.toLowerCase();
+      if (toolName.includes(searchTerm)) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  } else {
+    mainCards.forEach((card, index) => {
+      const categoryName = card.querySelector('h3').textContent.toLowerCase();
+      if (categoryName.includes(searchTerm)) {
+        card.style.display = 'block';
+        card.style.animation = 'none';
+        setTimeout(() => {
+          card.style.animation = `cardAppear 0.6s ease ${index * 0.1}s forwards`;
+        }, 10);
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+});
+
+function showNotification(message) {
+  notification.textContent = message;
+  notification.classList.add('show');
+  
+  setTimeout(() => {
+    notification.classList.remove('show');
+  }, 3000);
+}
+
+window.addEventListener('load', function() {
+  const cards = document.querySelectorAll('.card');
+  cards.forEach((card, index) => {
+    card.style.animationDelay = `${index * 0.1}s`;
+  });
+});
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' && view.style.display === 'block') {
+    goHome();
+  }
+  
+  if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+    e.preventDefault();
+    searchBox.focus();
+  }
+});
+</script>
+
+</body>
+</html>
