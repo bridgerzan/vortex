@@ -494,6 +494,14 @@ footer img:hover {
       <h3>Vortex</h3>
       <button class="btn" onclick="showCategory('misc')">Open</button>
     </div>
+    <div class="card" style="animation-delay: 0.5s">
+      <h3>Zimmerman</h3>
+      <button class="btn" onclick="showCategory('zimmerman')">Open</button>
+    </div>
+    <div class="card" style="animation-delay: 0.6s">
+      <h3>More</h3>
+      <button class="btn" onclick="showCategory('more')">Open</button>
+    </div>
   </div>
 </main>
 <section id="category-view" class="container">
@@ -519,57 +527,83 @@ footer img:hover {
 }
 const DATA = {
   system: {
-    title: "Redlutus",
-    tools: [
-      {
-        name: "manual tasks",
-        code: "powershell -Command Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; Invoke-Expression (Invoke-RestMethod 'https://raw.githubusercontent.com/nolww/project-mohr/refs/heads/main/ManualTasks.ps1')"
-      },
-      {
-        name: "ModAnalyzer",
-        code: "powershell Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass && powershell Invoke-Expression (Invoke-RestMethod https://raw.githubusercontent.com/HabibiHadron/HabibiModAnalyzer/refs/heads/main/HabibiModAnalyzer.ps1)"
-      },
-      {
-        name: "path",
-        code: "powershell Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass && powershell Invoke-Expression (Invoke-RestMethod https://raw.githubusercontent.com/bacanoicua/Screenshare/main/RedLotusSignatures.ps1)"
-      },
-      {
-        name: "prefetch checker",
-        code: "powershell Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass && powershell Invoke-Expression (Invoke-RestMethod https://raw.githubusercontent.com/bacanoicua/Screenshare/main/RedLotusPrefetchIntegrityAnalyzer.ps1)"
-      },
-      {
-        name: "Bam",
-        code: "powershell Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass && powershell Invoke-Expression (Invoke-RestMethod https://raw.githubusercontent.com/PureIntent/ScreenShare/main/RedLotusBam.ps1)"
-      },
-      {
-        name: "task shulder",
-        code: "powershell -Command Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; Invoke-Expression (Invoke-RestMethod 'https://raw.githubusercontent.com/ObsessiveBf/Task-Scheduler-Parser/main/script.ps1')"
-      }
-    ]
+  title: "Redlutus",
+  tools: [
+    {
+      name: "manual tasks",
+      code: "powershell -Command Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; Invoke-Expression (Invoke-RestMethod 'https://raw.githubusercontent.com/nolww/project-mohr/refs/heads/main/ManualTasks.ps1')"
+    },
+    {
+      name: "ModAnalyzer",
+      code: "powershell Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass && powershell Invoke-Expression (Invoke-RestMethod https://raw.githubusercontent.com/HabibiHadron/HabibiModAnalyzer/refs/heads/main/HabibiModAnalyzer.ps1)"
+    },
+    {
+      name: "path",
+      code: "powershell Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass && powershell Invoke-Expression (Invoke-RestMethod https://raw.githubusercontent.com/bacanoicua/Screenshare/main/RedLotusSignatures.ps1)"
+    },
+    {
+      name: "prefetch checker",
+      code: "powershell Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass && powershell Invoke-Expression (Invoke-RestMethod https://raw.githubusercontent.com/bacanoicua/Screenshare/main/RedLotusPrefetchIntegrityAnalyzer.ps1)"
+    },
+    {
+      name: "Bam",
+      code: "powershell Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass && powershell Invoke-Expression (Invoke-RestMethod https://raw.githubusercontent.com/PureIntent/ScreenShare/main/RedLotusBam.ps1)"
+    },
+    {
+      name: "task shulder",
+      code: "powershell -Command Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; Invoke-Expression (Invoke-RestMethod 'https://raw.githubusercontent.com/ObsessiveBf/Task-Scheduler-Parser/main/script.ps1')"
+    },
+    {
+      name: "HardDiskVolumeConverter",
+      code: "powershell Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass && powershell Invoke-Expression (Invoke-RestMethod https://raw.githubusercontent.com/bacanoicua/Screenshare/main/RedLotusHardDiskVolumeConverter.ps1)"
+    },
+    {
+      name: "Streams",
+      code: "powershell Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass && powershell Invoke-Expression (Invoke-RestMethod https://raw.githubusercontent.com/spokwn/powershells/refs/heads/main/Streams.ps1)"
+    }
+  ]
   },
-  network: {
-    title: "Nirsoft",
-    tools: [
-      { name: "WinPrefetchView", url: "https://www.nirsoft.net/utils/winprefetchview-x64.zip" },
-      { name: "USBDriveLog", url: "https://www.nirsoft.net/utils/usbdrivelog.zip" },
-      { name: "USBDeview", url: "https://www.nirsoft.net/utils/usbdeview-x64.zip" },
-      { name: "LastActivityView", url: "https://www.nirsoft.net/utils/lastactivityview.zip" }
-    ]
+
+
+network: {
+  title: "Nirsoft",
+  tools: [
+    { "name": "WinPrefetchView", url: "https://www.nirsoft.net/utils/winprefetchview-x64.zip" },
+    { "name": "USBDriveLog", url: "https://www.nirsoft.net/utils/usbdrivelog.zip" },
+    { "name": "USBDeview", url: "https://www.nirsoft.net/utils/usbdeview-x64.zip" },
+    { "name": "LastActivityView", url: "https://www.nirsoft.net/utils/lastactivityview.zip" },
+    { "name": "ShellBagsView", url: "https://www.nirsoft.net/utils/shellbagsview.zip" },
+    { "name": "NirCmd", url: "https://www.nirsoft.net/utils/nircmd.zip" },
+    { "name": "NetworkTrafficView", url: "https://www.nirsoft.net/utils/networktrafficview.zip" },
+    { "name": "TaskSchedulerView", url: "https://www.nirsoft.net/utils/taskschedulerview-x64.zip" },
+    { "name": "BrowsingHistoryView", url: "https://www.nirsoft.net/utils/browsinghistoryview-x64.zip" },
+    { "name": "FullEventLogView", url: "https://www.nirsoft.net/utils/fulleventlogview-x64.zip" },
+    { "name": "HashMyFiles", url: "https://www.nirsoft.net/utils/hashmyfiles-x64.zip" },
+    { "name": "EncryptedRegView", url: "https://www.nirsoft.net/toolsdownload/encryptedregview-x64.zip" },
+    { "name": "DataProtectionDecryptor", url: "https://www.nirsoft.net/toolsdownload/dataprotectiondecryptor-x64.zip" },
+    { "name": "NetworkUsageView", url: "https://www.nirsoft.net/utils/networkusageview-x64.zip" }
+  ]
   },
+
   analysis: {
-    title: "Epokw",
-    tools: [
-      { name: "BAM Parser", url: "https://github.com/spokwn/BAM-parser/releases/download/v1.2.9/BAMParser.exe" },
-      { name: "Prefetch Parser", url: "https://github.com/spokwn/prefetch-parser/releases/download/v1.5.5/PrefetchParser.exe" },
-      { name: "PcaSvc", url: "https://github.com/spokwn/pcasvc-executed/releases/download/v0.8.6/PcaSvcExecuted.exe" },
-      { name: "ProcessParser", url: "https://github.com/spokwn/process-parser/releases/download/v0.5.5/ProcessParser.exe" }
-    ]
+title: "Epokw",
+tools: [
+  { name: "BAM Parser", url: "https://github.com/spokwn/BAM-parser/releases/download/v1.2.9/BAMParser.exe" },
+  { name: "Prefetch Parser", url: "https://github.com/spokwn/prefetch-parser/releases/download/v1.5.5/PrefetchParser.exe" },
+  { name: "PcaSvc", url: "https://github.com/spokwn/pcasvc-executed/releases/download/v0.8.6/PcaSvcExecuted.exe" },
+  { name: "ProcessParser", url: "https://github.com/spokwn/process-parser/releases/download/v0.5.5/ProcessParser.exe" },
+  { name: "Espouken Bitrate", url: "https://github.com/spokwn/Tool/releases/download/v1.1.2/espoukenBitrate.exe" },
+  { name: "Kernel Live Dump Tool", url: "https://github.com/spokwn/KernelLiveDumpTool/releases/download/v1.1/KernelLiveDumpTool.exe" },
+  { name: "Bam Deleted Keys", url: "https://github.com/spokwn/BamDeletedKeys/releases/download/v1.0/BamDeletedKeys.exe" },
+  { name: "Activities Cache Execution", url: "https://github.com/spokwn/ActivitiesCache-execution/releases/tag/v0.6.5" },
+  { name: "Journal Trace Normal", url: "https://github.com/spokwn/JournalTrace/releases/download/1.2/JournalTraceNormal.exe" }
+]
   },
   misc: {
     title: "Vortex",
     tools: [
       {
-        name: "all in one (bridgezna)",
+        name: "all in one (bridgezan)",
         code: "powershell -Command Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; Invoke-Expression (Invoke-RestMethod 'https://raw.githubusercontent.com/bridgerzan/screenshare-tools/refs/heads/main/all-in-one-beta.ps1')"
       },
       {
@@ -604,9 +638,48 @@ const DATA = {
         name: "alt detector",
         code: "powershell -Command Set-ExecutionPolicy Bypass -Scope Process; Invoke-Expression (Invoke-RestMethod 'https://raw.githubusercontent.com/ThereWasVelocity/SS-Tools/main/Alt-Detector.ps1')"
       }
+]
+  },
+  zimmerman: {
+    title: "Zimmerman",
+    tools: [
+      { name: "AmcacheParser", url: "https://download.ericzimmermanstools.com/AmcacheParser.zip" },
+      { name: "AppCompatCacheParser", url: "https://download.ericzimmermanstools.com/AppCompatCacheParser.zip" },
+      { name: "bstrings", url: "https://download.ericzimmermanstools.com/bstrings.zip" },
+      { name: "hasher", url: "https://download.ericzimmermanstools.com/hasher.zip" },
+      { name: "JumpListExplorer", url: "https://download.ericzimmermanstools.com/net6/JumpListExplorer.zip" },
+      { name: "MFTECmd", url: "https://download.ericzimmermanstools.com/MFTECmd.zip" },
+      { name: "MFTExplorer", url: "https://download.ericzimmermanstools.com/net6/MFTExplorer.zip" },
+      { name: "PECmd", url: "https://download.ericzimmermanstools.com/PECmd.zip" },
+      { name: "RecentFileCacheParser", url: "https://download.ericzimmermanstools.com/RecentFileCacheParser.zip" },
+      { name: "RegistryExplorer", url: "https://download.ericzimmermanstools.com/net6/RegistryExplorer.zip" },
+      { name: "ShellBagsExplorer", url: "https://download.ericzimmermanstools.com/net6/ShellBagsExplorer.zip" }
+]
+  },
+more: {
+  title: "More",
+  tools: [
+    { name: "Recuva", url: "https://soft98.ir/software/recovery-data/538-recuva.html" },
+    { name: "Windows 10 Live Information Viewer", url: "https://www.majorgeeks.com/files/details/windows_10_live_information_viewer.html" },
+    { name: "HxD Hex Editor", url: "https://www.yasdl.com/202566/hxd.html" },
+    { name: "BinText", url: "https://www.majorgeeks.com/files/details/bintext.html" },
+    { name: "Magnet RAM Capture", url: "https://www.magnetforensics.com/resources/magnet-ram-capture/" },
+    { name: "Process Hacker", url: "https://soft98.ir/software/821-process-hacker.html" },
+    { name: "System Informer (Canary)", url: "https://systeminformer.com/canary" },
+    { name: "Everything (VoidTools)", url: "https://www.voidtools.com/downloads/" },
+    { name: "FTK Imager (GitHub)", url: "https://github.com/codejanus/study_Security/tree/master/AccessData%20FTK%20Imager" },
+    { name: "Echo Journal Tool", url: "https://dl.echo.ac/tool/journal" },
+    { name: "Echo Tools (Free)", url: "https://echo.ac/free" },
+    { name: "Disk Investigator", url: "https://www.majorgeeks.com/files/details/disk_investigator.html" },
+    { name: "Detect It Easy (DIE)", url: "https://www.majorgeeks.com/files/details/detect_it_easy.html" },
+    { name: "DPsAnalyzer (GitHub)", url: "https://github.com/nay-cat/dpsanalyzer/releases/tag/1.3" },
+    { name: "AntiCheat AC (Main Download)", url: "https://anticheat.ac/download/" },
+    { name: "AntiCheat AC CLI", url: "https://anticheat.ac/downloads/general/cli" },
+    { name: "Jarabel Light", url: "https://github.com/nay-cat/Jarabel/releases/download/light/Jarabel.Light.exe" },
     ]
   }
 };
+
 const home = document.getElementById("home");
 const view = document.getElementById("category-view");
 const titleEl = document.getElementById("category-title");
